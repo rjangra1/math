@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathLab - Kids Practice Zone</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    
+    <div class="top-bar">
+        <div class="container">
+            <div class="logo-section">
+                <i class="fas fa-calculator"></i>
+                <span>MathLab</span>
+            </div>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="#" onclick="goToSection('home')">
+                        <i class="fas fa-home"></i> Home
+                    </a></li>
+                    <li class="has-dropdown">
+                        <a href="#" onclick="showDropdown()">
+                            <i class="fas fa-gamepad"></i> Practice <i class="fas fa-chevron-down"></i>
+                        </a>
+                        <div class="dropdown-menu" id="practiceMenu">
+                            <a href="#" onclick="startMathPractice('addition')">
+                                <i class="fas fa-plus"></i> Addition
+                            </a>
+                            <a href="#" onclick="startMathPractice('subtraction')">
+                                <i class="fas fa-minus"></i> Subtraction  
+                            </a>
+                            <a href="#" onclick="startMathPractice('multiplication')">
+                                <i class="fas fa-times"></i> Multiplication
+                            </a>
+                            <a href="#" onclick="startMathPractice('division')">
+                                <i class="fas fa-divide"></i> Division
+                            </a>
+                        </div>
+                    </li>
+                    <li><a href="#" onclick="goToSection('profile')">
+                        <i class="fas fa-user"></i> My Progress
+                    </a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+    <div class="main-wrapper">
+        <!-- home page -->
+        <div id="home" class="page-content show">
+            <div class="welcome-area">
+                <h1 class="big-title">Math Practice Made Fun!</h1>
+                <p class="subtitle">Learn math while earning cool badges and points</p>
+                
+                <div class="stats-row">
+                    <div class="stat-box">
+                        <i class="fas fa-star"></i>
+                        <h3 id="points">0</h3>
+                        <p>Points</p>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-medal"></i>
+                        <h3 id="badges">0</h3>
+                        <p>Badges</p>
+                    </div>
+                    <div class="stat-box">
+                        <i class="fas fa-chart-bar"></i>
+                        <h3 id="avg">0%</h3>
+                        <p>Average</p>
+                    </div>
+                </div>
+                
+                <button class="start-button" onclick="showDropdown()">
+                    <i class="fas fa-play"></i> Let's Practice!
+                </button>
+            </div>
+        </div>
+        <!-- practice section -->
+        <div id="practice" class="page-content">
+            <div class="practice-area">
+                <div class="practice-header">
+                    <h2 id="practiceType">Math Practice</h2>
+                    <div class="question-info">
+                        <span>Question <span id="qNum">1</span> of 15</span>
+                        <span>Score: <span id="score">0</span>/15</span>
+                    </div>
+                </div>
+                
+                <div class="question-box">
+                    <div class="math-problem">
+                        <span id="num1">5</span>
+                        <span id="mathOperator">+</span>
+                        <span id="num2">3</span>
+                        <span>=</span>
+                        <input id="userAnswer">
+                    </div>
+                    <div class="button-row">
+                        <button class="answer-btn" onclick="checkAnswer()">
+                            <i class="fas fa-check"></i> Answer
+                        </button>
+                        <button class="skip-btn" onclick="skipThis()">
+                            <i class="fas fa-arrow-right"></i> Skip
+                        </button>
+                    </div>
+                </div>
+                <div class="result-message" id="message"></div>
+                
+                <div class="progress-track">
+                    <div class="progress-bar-container">
+                        <div class="progress-bar" id="progressBar"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- results page -->
+        <div id="results" class="page-content">
+            <div class="results-area">
+                <h2>Great Job!</h2>
+                <div class="score-display">
+                    <div class="circular-progress" id="circularScore">
+                        <div class="inner-circle">
+                            <span id="finalPercent">0%</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="results-breakdown">
+                    <div class="result-item">
+                        <i class="fas fa-check green"></i>
+                        <span>Right: <span id="correctCount">0</span></span>
+                    </div>
+                    <div class="result-item">
+                        <i class="fas fa-times red"></i>
+                        <span>Wrong: <span id="wrongCount">0</span></span>
+                    </div>
+                    <div class="result-item">
+                        <i class="fas fa-coins gold"></i>
+                        <span>Points: <span id="earnedPoints">0</span></span>
+                    </div>
+                </div>
+                <div class="badge-alert" id="newBadges"></div>
+                <div class="action-buttons">
+                    <button class="try-again-btn" onclick="showDropdown()">
+                        <i class="fas fa-redo"></i> Try Again
+                    </button>
+                    <button class="home-btn" onclick="goToSection('home')">
+                        <i class="fas fa-home"></i> Home
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- profile/progress page -->
+        <div id="profile" class="page-content">
+            <div class="profile-area">
+                <h2>Your Math Journey</h2>
+                <div class="big-stats">
+                    <div class="big-stat">
+                        <i class="fas fa-trophy"></i>
+                        <h3 id="totalPoints">0</h3>
+                        <p>Total Points</p>
+                    </div>
+                    <div class="big-stat">
+                        <i class="fas fa-brain"></i>
+                        <h3 id="totalPractices">0</h3>
+                        <p>Completed</p>
+                    </div>
+                </div>
+                
+                <div class="badges-area">
+                    <h3>Achievement Badges</h3>
+                    <div class="badge-collection" id="badgeDisplay"></div>
+                </div>
+                
+                <div class="subject-progress">
+                    <h3>Subject Progress</h3>
+                    <div class="subjects-list">
+                        <div class="subject">
+                            <span>Addition</span>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" id="addProgress"></div>
+                            </div>
+                            <span id="addCount">0</span>
+                        </div>
+                        <div class="subject">
+                            <span>Subtraction</span>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" id="subProgress"></div>
+                            </div>
+                            <span id="subCount">0</span>
+                        </div>
+                        <div class="subject">
+                            <span>Multiplication</span>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" id="multProgress"></div>
+                            </div>
+                            <span id="multCount">0</span>
+                        </div>
+                        <div class="subject">
+                            <span>Division</span>
+                            <div class="progress-bar-container">
+                                <div class="progress-bar" id="divProgress"></div>
+                            </div>
+                            <span id="divCount">0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="index.js"></script>
+</body>
+</html>
