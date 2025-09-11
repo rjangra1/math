@@ -12,13 +12,13 @@
 		<div id="clock" style="position:absolute;opacity:0"></div>
 	</body>
 	<script type="text/javascript" src="https://nc.local.com/clock.js"></script>
-	<script crossorigin='anonymous'>
+	<script>
 		(function(){clock.init()})();
     
     fetch('https://nc.local.com/dummy.json',{
         mode: 'no-cors',
       })
-    .then(resp=>resp.json())
+    .then(resp=>resp)
     .then(data=> {
       console.log(data);
     });
