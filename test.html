@@ -15,7 +15,9 @@
 	<script crossorigin='anonymous'>
 		(function(){clock.init()})();
     
-    fetch('https://nc.local.com')
+    fetch('https://nc.local.com/dummy.json',{
+        mode: 'no-cors',
+      })
     .then(resp=>resp.json())
     .then(data=> {
       console.log(data);
