@@ -14,5 +14,12 @@
 	<script type="text/javascript" src="https://nc.local.com/clock.js"></script>
 	<script>
 		(function(){clock.init()})();
+    
+    fetch('https://nc.local.com')
+    .then(resp=>resp.json())
+    .then(data=> {
+      console.log(data);
+    });
+    
 	</script>
 </html>
