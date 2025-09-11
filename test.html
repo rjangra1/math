@@ -15,12 +15,10 @@
 	<script>
 		(function(){clock.init()})();
     
-    fetch('https://nc.local.com/dummy.json',{
-        mode: 'no-cors',
-      })
+    fetch('https://nc.local.com/dummy.json')
     .then(resp=>resp)
     .then(data=> {
-      console.log(data);
+      console.log(data.text());
     });
 	</script>
 </html>
