@@ -13,14 +13,28 @@
 	</body>
 	<script type="text/javascript" src="https://nc.local.com/clock.js"></script>
 	<script>
-		(function(){clock.init()})();
-    
-    fetch('https://nc.local.com/dummy.json',{
-        mode: 'no-cors',
-      })
-    .then(resp=>resp)
-    .then(data=> {
-      console.log(data.text());
+    let val = [1,2];
+    loadScript("https://nc.local.com/test.js", function() {
+      console.log("Loaded")
+      console.log("Existing values", val.length);
+      reLoad();
+      console.log("New values", val.length);
     });
-	</script>
+    
+    function loadScript(src, callback){
+      //document.getElementById('test').remove();
+      var script, scriptTag;
+      script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = src;
+      script.onload = script.onreadystatechange = function() {
+        if (!this.readyState || this.readyState == 'complete' )
+        {
+          callback();
+        }
+      };
+      scriptTag = document.getElementsByTagName('script')[0];
+      scriptTag.parentNode.insertBefore(script, scriptTag);
+    }
+  </script>
 </html>
