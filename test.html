@@ -21,11 +21,22 @@
       console.log(data);
     });
 
-    fetch('https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml')
-    .then(resp=>resp)
-    .then(data=> {
-      console.log(data.text());
-    });
+    async function fetchRSSFeed(url) {
+        try {
+            const response = await fetch(url);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            const rssText = await response.text();
+            console.log(rssText); // Output raw XML text
+        } catch (error) {
+            console.error('Error fetching RSS feed:', error);
+        }
+    }
+
+    // Example RSS feed URL
+    const rssUrl = 'https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml';
+    fetchRSSFeed(rssUrl);
 
     let val = [1,2];
     loadScript("https://nc.local.com/test.js", function() {
