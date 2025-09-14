@@ -16,9 +16,9 @@
 		(function(){clock.init()})();
     
     fetch('https://nc.local.com/dummy.json')
-    .then(resp=>resp)
+    .then(resp=>resp.json())
     .then(data=> {
-      console.log(data.text());
+      console.log(data);
     });
 
     fetch('https://rss.nytimes.com/services/xml/rss/nyt/HomePage.xml')
@@ -26,6 +26,34 @@
     .then(data=> {
       console.log(data.text());
     });
+
+    let val = [1,2];
+    loadScript("https://nc.local.com/test.js", function() {
+      console.log("Loaded")
+      console.log("Existing values", val.length);
+      reLoad();
+      console.log("New values", val.length);
+    });
+    
+    function loadScript(src, callback){
+      if(document.getElementById('test')){
+        document.getElementById('test').remove();
+      }
+
+      var script, scriptTag;
+      script = document.createElement('script');
+      script.id = "test";
+      script.type = 'text/javascript';
+      script.src = src;
+      script.onload = script.onreadystatechange = function() {
+        if (!this.readyState || this.readyState == 'complete' )
+        {
+          callback();
+        }
+      };
+      scriptTag = document.getElementsByTagName('script')[0];
+      scriptTag.parentNode.insertBefore(script, scriptTag);
+    }
 
 	</script>
 </html>
